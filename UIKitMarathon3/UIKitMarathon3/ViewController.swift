@@ -4,6 +4,15 @@ final class ViewController: UIViewController {
     
     // MARK: - Private properties
     
+    private lazy var animatedView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemBlue
+        view.layer.cornerRadius = 12
+        view.translatesAutoresizingMaskIntoConstraints = false
+        
+        return view
+    }()
+    
     private lazy var slider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -21,6 +30,16 @@ final class ViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         let layoutMarginsGuide = view.layoutMarginsGuide
+        
+        view.addSubview(animatedView)
+        let animatedViewConstraints = [
+            animatedView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
+            animatedView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
+            animatedView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.topAnchor, constant: 64),
+            animatedView.widthAnchor.constraint(equalToConstant: 100),
+            animatedView.heightAnchor.constraint(equalTo: animatedView.widthAnchor)
+        ]
+        view.addConstraints(animatedViewConstraints)
         
         view.addSubview(slider)
         let sliderConstraints = [
